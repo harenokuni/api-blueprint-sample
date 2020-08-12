@@ -1,0 +1,57 @@
+# Group サンプルA
+グループの説明
+
+## GET Message [GET /message/{id}]
+説明
++ Parameters
+    + id: 1 (number) - An unique identifier of the message.
++ Request
+    + Headers
+            Accept: text/plain
++ Response 200 (text/plain)
+    + Body
+            Hello World!
++ Response 200 (application/json)
+    + Headers
+            X-My-Message-Header: 42
+    + Body
+            {
+              "id": 1,
+              "message": "Hello World!"
+            }
+
+
+## GET Message [GET /message{?id}]
+URLパラメータ
++ Parameters
+    + id: 1 (number) - パラメータの説明
+
+## POST Message [POST /message/]
+説明文
++ Request (application/json)
+    + Headers
+        Authorization: Basic {token}
+    + Attributes
+        + message: `Hello World!` (string, required) 
+        + channel: (object, required) 
+            + id: `uId` (string, required) - パラメータの説明
+            + hoge: `hoge` (string, required) - パラメータの説明
+
++ Response 200 (application/json)  
+    + Headers
+        Set-Cookie: PHPSESSID=XXXXXXXXXXXXXXXXXXXXXXXXXX; path=/hoge/; domain=localhost; HttpOnly
+    + Attributes
+        + result: `1` (number, required) - パラメータの説明
++ Response 201 (application/json)  
+
+## PUT Message [PUT /message/{id}]
+PUTの説明
++ Request Update JSON Message (application/json)
+        { "message": "All your base are belong to us." }
++ Response 204
+
+## DELETE Message [DELETE /message/{id}]
+DELETEの説明
++ Request Update JSON Message (application/json)
+        { "message": "" }
++ Response 204

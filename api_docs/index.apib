@@ -1,0 +1,152 @@
+FORMAT: 1A
+HOST: http://localhost/api
+
+# API Blueprintのサンプル
+API Blueprintのサンプル
+
+# Group サンプルA
+グループの説明
+
+## GET Message [GET /message/{id}]
+説明
++ Parameters
+    + id: 1 (number) - An unique identifier of the message.
++ Request
+    + Headers
+            Accept: text/plain
++ Response 200 (text/plain)
+    + Body
+            Hello World!
++ Response 200 (application/json)
+    + Headers
+            X-My-Message-Header: 42
+    + Body
+            {
+              "id": 1,
+              "message": "Hello World!"
+            }
+
+
+## GET Message [GET /message{?id}]
+URLパラメータ
++ Parameters
+    + id: 1 (number) - パラメータの説明
+
+## POST Message [POST /message/]
+説明文
++ Request (application/json)
+    + Headers
+        Authorization: Basic {token}
+    + Attributes
+        + message: `Hello World!` (string, required) 
+        + channel: (object, required) 
+            + id: `uId` (string, required) - パラメータの説明
+            + hoge: `hoge` (string, required) - パラメータの説明
+
++ Response 200 (application/json)  
+    + Headers
+        Set-Cookie: PHPSESSID=XXXXXXXXXXXXXXXXXXXXXXXXXX; path=/lap-gyoumu/; domain=localhost; HttpOnly
+    + Attributes
+        + result: `1` (number, required) - パラメータの説明
++ Response 201 (application/json)  
+
+## PUT Message [PUT /message/{id}]
+PUTの説明
++ Request Update JSON Message (application/json)
+        { "message": "All your base are belong to us." }
++ Response 204
+
+## DELETE Message [DELETE /message/{id}]
+DELETEの説明
++ Request Update JSON Message (application/json)
+        { "message": "" }
++ Response 204
+
+
+# Group サンプルB
+
+# Named Resource and Actions API
+This API example demonstrates how to name a resource and its actions, to give
+the reader a better idea about what the resource is used for.
+
+## API Blueprint
++ [Previous: Resource and Actions](02.%20Resource%20and%20Actions.md)
++ [This: Raw API Blueprint](https://raw.github.com/apiaryio/api-blueprint/master/examples/03.%20Named%20Resource%20and%20Actions.md)
++ [Next: Grouping Resources](04.%20Grouping%20Resources.md)
+
+# My Message [/message]
+OK, `My Message` probably isn't the best name for our resource but it will do
+for now. Note the URI `/message` is enclosed in square brackets.
+
+## Retrieve a Message [GET]
+Now this is informative! No extra explanation needed here. This action clearly
+retrieves the message.
+
++ Response 200 (text/plain)
+        Hello World!
+
+## Update a Message [PUT]
+`Update a message` - nice and simple naming is the best way to go.
++ Request (text/plain)
+        All your base are belong to us.
++ Response 204
+
+# Group サンプルC
+
+# Advanced Action API
+A resource action is ? in fact ? a state transition. This API example
+demonstrates an action - state transition - to another resource.
+
+## API Blueprint
++ [Previous: Resource Model](11.%20Resource%20Model.md)
++ [This: Raw API Blueprint](https://raw.github.com/apiaryio/api-blueprint/master/examples/12.%20Advanced%20Action.md)
++ [Next: Named Endpoints](13.%20Named%20Endpoints.md)
+
+# Tasks [/tasks/tasks{?status,priority}]
+
++ Parameters
+    + status (string)
+    + priority (number)
+
+## List All Tasks [GET]
+
++ Response 200 (application/json)
+    + Body
+        [
+            {
+                "id": 123,
+                "name": "Exercise in gym",
+                "done": false,
+                "type": "task"
+            },
+            {
+                "id": 124,
+                "name": "Shop for groceries",
+                "done": true,
+                "type": "task"
+            }
+        ]
+
+## Retrieve Task [GET /task/{id}]
+This is a state transition to another resource.
+
++ Parameters
+    + id (string)
+
++ Response 200 (application/json)
+    + Body
+        {
+            "id": 123,
+            "name": "Go to gym",
+            "done": false,
+            "type": "task"
+        }
+
+## Delete Task [DELETE /task/{id}]
+
++ Parameters
+    + id (string)
+
++ Response 204
+
+
